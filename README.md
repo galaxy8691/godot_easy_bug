@@ -60,3 +60,7 @@ func tell_server_scene_created(peer_id: int):
 - 添加错误处理和重试机制
 - 使用字典记录每个客户端的准备状态
 - 只有在所有客户端都准备就绪后才开始服务器端的场景创建
+
+## 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情

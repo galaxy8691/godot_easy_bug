@@ -59,26 +59,6 @@ func tell_server_scene_created(peer_id: int):
 - Use a dictionary to track each client's ready status
 - Only start server-side scene creation when all clients are ready
 
-## Directory Structure
-
-```
-.
-├── docs/                    # Documentation directory
-│   ├── common-issues/       # Common issues records
-│   ├── best-practices/      # Best practices
-│   └── tutorials/           # Tutorials and guides
-├── examples/                # Example code
-└── README.md               # Project description
-```
-
-## How to Contribute
-
-1. Fork this repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some feature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details 
