@@ -1,5 +1,7 @@
 # Godot 开发经验与常见错误记录
 
+[English Version](README_EN.md)
+
 这个仓库用于记录在使用 Godot 引擎进行游戏开发时遇到的常见问题、解决方案以及经验总结。
 
 ## 经验记录
