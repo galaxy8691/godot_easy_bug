@@ -59,6 +59,65 @@ func tell_server_scene_created(peer_id: int):
 - Use a dictionary to track each client's ready status
 - Only start server-side scene creation when all clients are ready
 
+### 2. Solutions for RPC Object Transmission Limitations
+
+#### Problem Description
+In Godot's RPC system, you cannot directly transmit Object type instances. This is because RPC can only transmit basic data types and certain built-in types.
+
+#### Solutions
+There are two main approaches:
+
+1. Using Node Paths:
+   - Convert object references to node path strings
+   - Retrieve objects using the path on the receiving end
+
+2. Using Global Object Manager (Recommended):
+   - Create an AutoLoad singleton as object manager
+   - Assign unique IDs to each object
+   - Query objects through the manager using IDs
+
+#### Code Examples
+
+1. Using Node Paths:
+```gdscript
+@rpc("any_peer")
+func send_object_reference(node_path: String):
+    do_something(get_tree().get_node(node_path))
+```
+
+2. Using Object Manager:
+```gdscript
+# ObjectManager.gd (AutoLoad script)
+extends Node
+
+var object_map = {}
+var next_id = 0
+
+func register_object(obj: Object) -> int:
+    next_id += 1
+    object_map[next_id] = obj
+    return next_id
+
+func get_object(id: int) -> Object:
+    return object_map.get(id)
+
+func remove_object(id: int) -> void:
+    object_map.erase(id)
+
+# Usage Example
+@rpc("any_peer")
+func do_something_with_object(obj_id: int):
+    var obj = ObjectManager.get_object(obj_id)
+    do_something(obj)
+```
+
+#### Best Practices
+- Prefer the object manager approach for better object lifecycle management
+- Remember to remove objects from the manager when they're no longer needed
+- Use node paths for simple scene tree node references
+- Ensure paths are correct relative to the receiver when using node paths
+- Consider using object pooling for performance when dealing with many objects
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details 
